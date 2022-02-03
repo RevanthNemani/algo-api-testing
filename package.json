@@ -1,0 +1,25 @@
+{
+  "name": "api-testing",
+  "version": "1.0.0",
+  "description": "api testing for my algo trading setup",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RevanthNemani/algo-api-testing.git"
+  },
+  "keywords": [
+    "api-testing",
+    "algo",
+    "algo",
+    "trading"
+  ],
+  "author": "Revanth Nemani",
+  "license": "UNLICENCED",
+  "bugs": {
+    "url": "https://github.com/RevanthNemani/algo-api-testing/issues"
+  },
+  "homepage": "https://github.com/RevanthNemani/algo-api-testing#readme"
+}
