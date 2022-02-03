@@ -11,7 +11,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const compression = require('compression');
 const helmet = require('helmet');
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
+const sn = require('stocknotejsbridge');
 
 // * Importing environment variable
 require('dotenv').config();
@@ -56,7 +57,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // * Importing routers
-const logRoute = require('./routes/log');
+// const logRoute = require('./routes/log');
 
 // * importing controllers
 const errorController = require('./controllers/error');
@@ -88,7 +89,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // * logging Route
-app.use(logRoute);
+// app.use(logRoute);
 
 // * Error Route
 app.use(errorController.get404);
@@ -96,21 +97,42 @@ app.use(errorController.get404);
 // * Defining NoSQL relationships
 
 // * Initialize mongoose and start service
-mongoose
-    .connect(
-        `mongodb://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/?authSource=${DB_DATABASE_AUTH}&readPreference=primary&ssl=false`,
-        {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-            poolSize: 30,
-            dbName: DB_DATABASE,
-        }
-    )
-    .then(() => {
-        app.listen(PORT, () => {
-            console.log(`server listening on http://${HOST}:${PORT}`);
-        });
+// mongoose
+//     .connect(
+//         `mongodb://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/?authSource=${DB_DATABASE_AUTH}&readPreference=primary&ssl=false`,
+//         {
+//             useNewUrlParser: true,
+//             useUnifiedTopology: true,
+//             poolSize: 30,
+//             dbName: DB_DATABASE,
+//         }
+//     )
+//     .then(() => {
+//         app.listen(PORT, () => {
+//             console.log(`server listening on http://${HOST}:${PORT}`);
+//         });
+//     })
+//     .catch((err) => {
+//         console.log(err);
+//     });
+
+// sn setup
+const logindata = {
+    body: {
+        "userId": "revanthnemani",
+        "password": "Pratima@1998",
+        "yob": "1998"
+    }
+};
+
+sn.snapi.userLogin(logindata)
+    .then((data) => {
+        console.log('UserLogin:' + data);
     })
-    .catch((err) => {
-        console.log(err);
+    .catch((error) => {
+        console.log(error)
     });
+
+// app.listen(PORT, () => {
+//     console.log(`server listening on http://${HOST}:${PORT}`);
+// });
